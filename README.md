@@ -102,4 +102,4 @@ En el archivo `config.yml`, dentro de la sección `auto-buyer`, habilita el par�
 ---
 
 <p align="center">
-Desarrollado con ❤️ <a href="https://github.com/Miroshka000">Miroshka000</a>
+Mejorado con ❤️ <a href="(https://github.com/BrunoJaegerK)">BrunoJaegerK</a>
