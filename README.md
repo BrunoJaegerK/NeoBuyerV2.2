@@ -2,7 +2,7 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/Minecraft-Nukkit-brightgreen.svg" alt="Minecraft Nukkit">
-  <img src="https://img.shields.io/badge/Версия-2.1.0-blue.svg" alt="Versión">
+  <img src="https://img.shields.io/badge/Versión-2.1.0-blue.svg" alt="Versión">
   <img src="https://img.shields.io/badge/Java-17-orange.svg" alt="Java 17">
 </p>
 
