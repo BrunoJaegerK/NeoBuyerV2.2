@@ -1,0 +1,98 @@
+# por SocialMoods, ForgePlugins Studio y BrunoJaegerK
+
+# Los elementos se añaden utilizando el formulario siguiente.
+
+# "número":
+#   itemId: <ID elementos>
+#   count: <cantidad>
+#   price: <precio>
+#   url: <url-enlace a la imagen>
+#
+
+# El factor de incremento de costes se especifica únicamente como un valor de tipo Double (un número de coma flotante). 1 % = 0,01; 100 % = 1,0; 101 % = 1,01.
+# Este valor determina las fluctuaciones de precios en función del volumen de ventas por hora.
+price-ratio: 0.2
+# El coeficiente de incremento de coste basado en el nivel se especifica únicamente como un valor Double (un número de coma flotante). 1 % = 0,01; 100 % = 1,0; 101 % = 1,01.
+# El valor responde a los aumentos de precio en función del nivel del comprador.
+level-ratio: 0.1
+# El tiempo en minutos tras el cual se reinicia el recuento de ventas para los cambios de precio.
+update-period: 60
+# Notificaciones sobre actualizaciones de precios para el comprador
+update-mesage: "¡La tienda ha sido actualizada!"
+# Notificación emergente sobre la compra de un artículo en el comprador automático.
+sale-popup: "¡Vendiste {item_name} por {amount} monedas!"
+
+# Configuración de compra automática
+auto-buyer:
+  # Habilitar/deshabilitar la compatibilidad con recursos (hierro en bruto, oro, etc.)
+  resources-enabled: true
+  # Diccionario de recursos y sus productos (ID de recurso: ID de producto)
+  resources:
+    "15": 265  # Mineral de hierro -> Lingote de hierro
+    "14": 266  # Mineral de oro -> Lingote de oro
+    "56": 264  # Mineral de diamante -> Diamante
+    "129": 388 # Mineral de esmeralda -> Esmeralda
+    "153": 406 # Mineral de cuarzo -> Cuarzo
+
+# Configuración del formulario
+buyer-form:
+  title: "§l§aComprador"
+  content: |
+    ¡Bienvenido al comprador!§r§f
+    El artículo debe estar en tu inventario para poder venderlo.
+  button-template: "{item_name} a §a{price}monedas/u§r§f"
+  tutorial-title: "§l§aTutorial"
+  item-form-content: |
+    Está planeando vender §a{item}§r§f
+    За §a{price}/unidad§r§f
+    
+    Tienes: §a{available}§r§f
+  tutorial-content: |
+    El comprador opera en función de la dinámica de ventas.§r§f.§r§f
+    
+    Si las ventas son §abajas§r§f - el precio sube!
+    Si las ventas §asuben§r§f - el precio baja!
+    
+    §aEl coeficiente§r§f de precio determina el rango de fluctuación de los precios en función de las ventas.
+    Su importancia actual: §a{ratio}%§r§f
+  tutorial-button: "Información y configuración"
+  messages:
+    not-enough-items: "¡No tienes suficientes artículos para vender!"
+    success: "¡Has vendido los artículos con éxito! {count}"
+
+# Formulario con configuración
+settings-form:
+  title: "§l§aAjustes"
+  status-label: |
+    §aEl Auto-Buyer§r§f facilita la venta!§r§f
+    
+    ¡Simplemente recoge el §arecurso§r§f y se comprarán §aautomáticamente§r§f todos los objetos!
+    
+    §aNota:§r§f La función de compra automática funciona con objetos del menú principal y con recursos.
+    
+    Estado: §a{status}§r§f
+  toggle-label: "Activar/desactivar el comprador automático"
+  messages:
+    enabled: "Compra automática habilitada"
+    disabled: "Compra automática desactivada"
+
+# Personalización del artículo
+"0":
+  itemId: 265 # Lingote de hierro
+  count: 15
+  price: 100
+  url: "textures/items/iron_ingot"
+
+"1":
+  itemId: 266 # Lingote de oro
+  count: 10
+  price: 200
+  url: "textures/items/gold_ingot"
+
+"2":
+  itemId: 264 # Diamante
+  count: 5
+  price: 500
+  url: "textures/items/diamond"
+
+
