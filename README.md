@@ -7,56 +7,53 @@
 </p>
 
 <p align="center">
-  <a href="https://t.me/ForgePlugins">
-    <img src="https://img.shields.io/badge/Telegram-ForgePlugins-blue?logo=telegram" alt="Telegram">
-  </a>
   <a href="https://github.com/SocialMoods/NeoBuyerV2">
-    <img src="https://img.shields.io/badge/GitHub-Оригинальный_репозиторий-gray?logo=github" alt="Оригинальный репозиторий">
+    <img src="https://img.shields.io/badge/GitHub-Оригинальный_репозиторий-gray?logo=github" alt="Repositorio original">
   </a>
   <a href="https://github.com/Miroshka000/NeoBuyerV2">
-    <img src="https://img.shields.io/badge/GitHub-Форк_репозиторий-gray?logo=github" alt="Форк репозиторий">
+    <img src="https://img.shields.io/badge/GitHub-Форк_репозиторий-gray?logo=github" alt="Crear una bifurcación del repositorio">
   </a>
 </p>
 
-## 📋 Описание
+## 📋 Descripción
 
-**NeoBuyer V2** - это удобный плагин для Nukkit, который позволяет игрокам продавать свои предметы серверу по фиксированным или динамическим ценам. Плагин предоставляет простой интерфейс для продажи предметов и возможность включить автоматическую продажу.
+**NeoBuyer V2** - Este es un práctico plugin para Nukkit que permite a los jugadores vender sus objetos al servidor a precios fijos o dinámicos. El plugin ofrece una interfaz sencilla para vender objetos y la opción de activar la venta automática.
 
 > [!NOTE]
-> Данный плагин был переработан специально для [ForgePlugins Studio](https://t.me/ForgePlugins). Оригинальный код принадлежит [SocialMoods](https://github.com/SocialMoods/NeoBuyerV2).
+> Este plugin es un fork de NeoBuyer con algunas funciones añadidas y traducido al español
 
-## ✨ Особенности
+## ✨ Particularidades
 
-- **💰 Простая продажа предметов** - продавайте предметы серверу через удобный интерфейс
-- **🔄 Динамические цены** - цены на предметы могут меняться в зависимости от количества проданных предметов
-- **⚙️ Автоматическая продажа** - включите автоматическую продажу предметов по мере их появления в инвентаре
-- **🔹 Поддержка ресурсов** - автоматическая продажа необработанных руд (железо, золото, алмазы и др.)
-- **📊 Статистика продаж** - отслеживание проданных предметов и заработанных денег
-- **🌐 Удобные формы** - интуитивно понятный интерфейс для продажи предметов
+- **💰 Ventas de artículos simples** - Vende objetos al servidor a través de una interfaz cómoda.
+- **🔄 Precios dinámicos** – los precios de los artículos pueden variar según la cantidad de artículos vendidos.
+- **⚙️ Venta automática** – activa la venta automática de objetos a medida que aparecen en tu inventario.
+- **🔹 Soporte de recursos** – venta automática de minerales en bruto (hierro, oro, diamantes, etc.)
+- **📊 Estadísticas de ventas**: seguimiento de los artículos vendidos y los ingresos obtenidos.
+- **🌐 Formularios fáciles de usar** – una interfaz intuitiva para vender artículos
 
-## 🛠️ Установка
+## 🛠️ Instalación
 
-1. Скачайте последнюю версию плагина из [релизов](https://github.com/Miroshka000/NeoBuyerV2/releases)
-2. Поместите JAR-файл в директорию `plugins` вашего сервера
-3. Убедитесь, что установлены зависимости: FormConstructor и EconomyAPI
-4. Перезапустите сервер
-5. Настройте конфигурацию в файле `plugins/NeoBuyer/config.yml`
-6. Готово!
+1. Descarga la última versión del plugin desde la página de [releases]
+2. Coloca el archivo JAR en el directorio `plugins` de tu servidor
+3. Asegúrate de que las dependencias —FormConstructor y EconomyAPI— estén instaladas
+4. Reinicia el servidor
+5. Configura los ajustes en `plugins/NeoBuyer/config.yml`
+6. ¡Listo!
 
-## ⚙️ Настройка
+## ⚙️ Ajustes
 
-### Основные параметры
+### Parámetros clave
 
-В файле `config.yml` можно настроить следующие параметры:
+Puede configurar los siguientes parámetros en el archivo `config.yml`:
 
-- **buyer-form** - настройки внешнего вида форм для продажи предметов
-- **price-ratio** - коэффициент изменения цены при массовых продажах
-- **level-ratio** - коэффициент влияния уровня игрока на цену
-- **auto-buyer.resources-enabled** - включение/отключение поддержки ресурсов в автоматическом скупщике
+- **buyer-form** - ajustes de apariencia para los formularios de venta de objetos
+- **price-ratio** - factor de ajuste de precio para ventas al por mayor
+- **level-ratio** - factor que determina el impacto del nivel del jugador en el precio
+- **auto-buyer.resources-enabled** - activar/desactivar la compatibilidad con recursos en el comprador automático
 
-### Настройка предметов
+### Personalización del artículo
 
-Пример настройки предметов для продажи:
+Ejemplo de configuración de artículos a la venta:
 
 ```yaml
 items:
@@ -64,55 +61,54 @@ items:
     id: 1
     meta: 0
     count: 64
-    name: "Камень"
+    name: "Piedra"
     price: 5
     image: "https://example.com/stone.png"
   2:
     id: 17
     meta: 0
     count: 32
-    name: "Дерево"
+    name: "Madera"
     price: 10
     image: "https://example.com/wood.png"
 ```
 
-## 📌 Команды
+## 📌 Equipos
 
-| Команда | Описание |
+| Comando | Descripción |
 |---------|----------|
-| `/buyer` | Открыть форму продажи предметов |
-| `/buyer reload` | Перезагрузить конфигурацию плагина (требуются права администратора) |
+| `/buyer` | Abra el formulario de venta de artículos. |
+| `/buyer reload` | Recargar la configuración del plugin (se requieren privilegios de administrador) |
 
-## 📝 Разрешения
+## 📝 Permisos
 
-- `neobuyer.use` - Доступ к использованию основных функций плагина
-- `neobuyer.admin` - Доступ к административным функциям плагина (перезагрузка конфигурации)
+- `neobuyer.use` - Acceso a las funciones principales del plugin
+- `neobuyer.admin` - Acceso a las funciones administrativas del plugin (recargar la configuración)
 
-## ❓ Часто задаваемые вопросы
+## ❓ Preguntas frecuentes
 
 <details>
-<summary><b>Как работает автоматическая продажа?</b></summary>
+<summary><b>¿Cómo funciona la venta automática?</b></summary>
 <p>
-Автоматическая продажа позволяет автоматически продавать определенные предметы при их появлении в вашем инвентаре. Для включения этой функции откройте форму продавца с помощью команды <code>/buyer</code>, перейдите в "Настройки" и активируйте переключатель автопродажи.
+La venta automática te permite vender artículos específicos de forma automática tan pronto como aparecen en tu inventario. Para activar esta función, abre la interfaz de compra mediante el comando <code>/buyer</code>, ve a «Configuración» y activa la opción de venta automática.
 </p>
 </details>
 
 <details>
-<summary><b>Почему цены на предметы меняются?</b></summary>
+<summary><b>¿Por qué cambian los precios de los artículos?</b></summary>
 <p>
-Плагин использует динамическую систему ценообразования, при которой цены на предметы могут изменяться в зависимости от количества проданных предметов данного типа. Чем больше предметов одного типа продается на сервере, тем ниже может стать цена на них.
+El plugin utiliza un sistema de precios dinámicos en el que los precios de los objetos pueden variar según la cantidad vendida de un tipo específico. Cuantos más objetos de un tipo determinado se vendan en el servidor, menor puede llegar a ser su precio.
 </p>
 </details>
 
 <details>
-<summary><b>Как настроить автоматическую продажу руд?</b></summary>
+<summary><b>¿Cómo configuro la venta automática de minerales?</b></summary>
 <p>
-В файле конфигурации config.yml в разделе auto-buyer включите параметр resources-enabled, установив его значение true. Далее в разделе resources вы можете настроить соответствие между ID руды и ID готового продукта.
+En el archivo `config.yml`, dentro de la sección `auto-buyer`, habilita el parámetro `resources-enabled` estableciendo su valor en `true`. A continuación, en la sección `resources`, puedes configurar la correspondencia entre los ID de mineral y los ID de producto terminado.
 </p>
 </details>
 
 ---
 
 <p align="center">
-Разработано с ❤️ <a href="https://github.com/Miroshka000">Miroshka000</a> для <a href="https://t.me/ForgePlugins">ForgePlugins Studio</a>
-</p> 
+Desarrollado con ❤️ <a href="https://github.com/Miroshka000">Miroshka000</a>
