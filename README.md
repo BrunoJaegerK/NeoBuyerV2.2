@@ -6,15 +6,6 @@
   <img src="https://img.shields.io/badge/Java-17-orange.svg" alt="Java 17">
 </p>
 
-<p align="center">
-  <a href="https://github.com/SocialMoods/NeoBuyerV2">
-    <img src="https://img.shields.io/badge/GitHub-Оригинальный_репозиторий-gray?logo=github" alt="Repositorio original">
-  </a>
-  <a href="https://github.com/Miroshka000/NeoBuyerV2">
-    <img src="https://img.shields.io/badge/GitHub-Форк_репозиторий-gray?logo=github" alt="Crear una bifurcación del repositorio">
-  </a>
-</p>
-
 ## 📋 Descripción
 
 **NeoBuyer V2** - Este es un práctico plugin para Nukkit que permite a los jugadores vender sus objetos al servidor a precios fijos o dinámicos. El plugin ofrece una interfaz sencilla para vender objetos y la opción de activar la venta automática.
