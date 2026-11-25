@@ -54,8 +54,8 @@ public class Buyer extends PluginBase {
             
             this.getLogger().info(TextFormat.GREEN + "NeoBuyer " + TextFormat.YELLOW + "v" + this.getDescription().getVersion() + TextFormat.GREEN + " ¡Activado correctamente!");
             this.getLogger().info(TextFormat.AQUA + "-----------------------------------");
-            this.getLogger().info(TextFormat.YELLOW + "Sigueme en:");
-            this.getLogger().info(TextFormat.BLUE + "• Telegram: " + TextFormat.WHITE + "proximamente");
+            this.getLogger().info(TextFormat.YELLOW + "Síguenos en:");
+            this.getLogger().info(TextFormat.BLUE + "• Telegram: " + TextFormat.WHITE + "próximamente");
             this.getLogger().info(TextFormat.BLUE + "• VKontakte: " + TextFormat.WHITE + "proximamente");
             this.getLogger().info(TextFormat.BLUE + "• GitHub: " + TextFormat.WHITE + "https://github.com/BrunoJaegerK");
             this.getLogger().info(TextFormat.AQUA + "-----------------------------------");
