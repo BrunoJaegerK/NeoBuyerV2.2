@@ -129,7 +129,7 @@ public class BuyerForm {
 
     public static void ShowTutorialForm(Player player, Buyer plugin) {
         double ratio = plugin.getConfig().getDouble("price-ratio");
-        double level = plugin.getConfig().getInt("level-ratio");
+        double level = plugin.getConfig().getDouble("level-ratio");
 
         String tutorialTemplate = plugin.getConfig().getString("buyer-form.tutorial-content");
         SimpleForm tutorial = new SimpleForm(plugin.getConfig().getString("buyer-form.tutorial-title"));
@@ -143,10 +143,10 @@ public class BuyerForm {
 
         tutorial.addContent(tutorialContent);
         
-        tutorial.addButton("Настройки", (pl, button) -> 
+        tutorial.addButton("Configuración", (pl, button) -> 
             openSettingsForm(pl, plugin));
             
-        tutorial.addButton("Назад", (pl, button) -> 
+        tutorial.addButton("Volver", (pl, button) -> 
             openBuyerForm(pl, plugin));
             
         tutorial.send(player);
@@ -159,7 +159,7 @@ public class BuyerForm {
 
         boolean isAutoBuyerEnabled = plugin.getAutoBuyerAPI().isPlayerConnected(player);
 
-        String status = isAutoBuyerEnabled ? "Подключен" : "Отключен";
+        String status = isAutoBuyerEnabled ? "Activado" : "Desactivado";
         form.addElement(new Label(plugin.getConfig().getString("settings-form.status-label").replace("{status}", status)));
 
         form.addElement("toggle", new Toggle(plugin.getConfig().getString("settings-form.toggle-label"), isAutoBuyerEnabled));
