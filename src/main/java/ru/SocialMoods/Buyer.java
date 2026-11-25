@@ -41,6 +41,7 @@ public class Buyer extends PluginBase {
             }
             
             config = new Config(configFile, Config.YAML);
+            migrateLegacyMessages();
             
             boostManager = new BoostManager(this);
             autoBuyerAPI = new AutoBuyerAPI(this);
@@ -61,6 +62,15 @@ public class Buyer extends PluginBase {
             this.getLogger().info(TextFormat.AQUA + "-----------------------------------");
         } catch (Exception e) {
             getLogger().error("Error al activar el plugin", e);
+        }
+    }
+
+    /** Actualiza únicamente el texto antiguo que todavía estaba en ruso en configuraciones existentes. */
+    private void migrateLegacyMessages() {
+        String itemFormContent = config.getString("buyer-form.item-form-content", "");
+        if (itemFormContent.contains("За ")) {
+            config.set("buyer-form.item-form-content", itemFormContent.replace("За ", "Por "));
+            config.save();
         }
     }
 
