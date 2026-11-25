@@ -15,6 +15,8 @@ public class TimerTask implements Runnable {
         plugin.loadShopItems();
         PriceCalculator priceCalculator = new PriceCalculator(plugin);
         priceCalculator.resetSalesCount();
-        plugin.getServer().broadcastMessage(plugin.getConfig().getString("update-message"));
+        String message = plugin.getConfig().getString("update-message",
+                plugin.getConfig().getString("update-mesage", "¡La tienda ha sido actualizada!"));
+        plugin.getServer().broadcastMessage(message);
     }
 }
