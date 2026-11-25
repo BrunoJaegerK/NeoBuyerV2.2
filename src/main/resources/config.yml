@@ -1,32 +1,29 @@
-# por SocialMoods, ForgePlugins Studio y BrunoJaegerK
+# Configuración principal de NeoBuyer.
+# Los artículos se definen al final del archivo con su ID, cantidad y precio.
 
-# Los elementos se añaden utilizando el formulario siguiente.
-
-# "número":
-#   itemId: <ID elementos>
-#   count: <cantidad>
-#   price: <precio>
-#   url: <url-enlace a la imagen>
-#
-
-# El factor de incremento de costes se especifica únicamente como un valor de tipo Double (un número de coma flotante). 1 % = 0,01; 100 % = 1,0; 101 % = 1,01.
-# Este valor determina las fluctuaciones de precios en función del volumen de ventas por hora.
+# Variación de precios según el volumen de ventas.
+# 0.2 equivale al 20 %.
 price-ratio: 0.2
-# El coeficiente de incremento de coste basado en el nivel se especifica únicamente como un valor Double (un número de coma flotante). 1 % = 0,01; 100 % = 1,0; 101 % = 1,01.
-# El valor responde a los aumentos de precio en función del nivel del comprador.
-level-ratio: 0.1
-# El tiempo en minutos tras el cual se reinicia el recuento de ventas para los cambios de precio.
-update-period: 60
-# Notificaciones sobre actualizaciones de precios para el comprador
-update-mesage: "¡La tienda ha sido actualizada!"
-# Notificación emergente sobre la compra de un artículo en el comprador automático.
-sale-popup: "¡Vendiste {item_name} por {amount} monedas!"
 
-# Configuración de compra automática
+# Coeficiente de ajuste según el nivel del comprador.
+# 0.1 equivale al 10 %.
+level-ratio: 0.1
+
+# Tiempo en minutos entre actualizaciones y reinicios del contador de ventas.
+update-period: 60
+
+# Mensaje global cuando se actualiza la tienda.
+update-message: "¡La tienda ha sido actualizada!"
+
+# Aviso emergente de las ventas automáticas.
+# Variables: {item_name}, {amount}, {boost}
+sale-popup: "¡Vendiste {item_name} por {amount} monedas! (Boost: {boost})"
+
+# Configuración de venta automática.
 auto-buyer:
-  # Habilitar/deshabilitar la compatibilidad con recursos (hierro en bruto, oro, etc.)
+  # Activa o desactiva la compatibilidad con recursos sin procesar.
   resources-enabled: true
-  # Diccionario de recursos y sus productos (ID de recurso: ID de producto)
+  # Relación entre el ID del recurso y el ID del producto final.
   resources:
     "15": 265  # Mineral de hierro -> Lingote de hierro
     "14": 266  # Mineral de oro -> Lingote de oro
@@ -34,49 +31,56 @@ auto-buyer:
     "129": 388 # Mineral de esmeralda -> Esmeralda
     "153": 406 # Mineral de cuarzo -> Cuarzo
 
-# Configuración del formulario
+# Personalización de los formularios.
 buyer-form:
   title: "§l§aComprador"
   content: |
     ¡Bienvenido al comprador!§r§f
-    El artículo debe estar en tu inventario para poder venderlo.
-  button-template: "{item_name} a §a{price}monedas/u§r§f"
-  tutorial-title: "§l§aTutorial"
+    Ten el artículo en tu inventario para poder venderlo.
+  button-template: "{item_name} x{item_count} - §a{price} monedas§r§f"
+  tutorial-title: "§l§aInformación"
   item-form-content: |
-    Está planeando vender §a{item}§r§f
-    За §a{price}/unidad§r§f
-    
-    Tienes: §a{available}§r§f
+    Vas a vender §a{item}§r§f
+    Precio por unidad: §a{price}§r§f
+
+    Cantidad disponible: §a{available}§r§f
   tutorial-content: |
-    El comprador opera en función de la dinámica de ventas.§r§f.§r§f
-    
-    Si las ventas son §abajas§r§f - el precio sube!
-    Si las ventas §asuben§r§f - el precio baja!
-    
-    §aEl coeficiente§r§f de precio determina el rango de fluctuación de los precios en función de las ventas.
-    Su importancia actual: §a{ratio}%§r§f
+    La tienda ajusta sus precios según la actividad de ventas.§r§f
+
+    Cuando las ventas son §abajas§r§f, el precio puede subir.
+    Cuando las ventas §aaumentan§r§f, el precio puede bajar.
+
+    El coeficiente de variación actual es: §a{ratio}§r§f
+    Ajuste por nivel: §a{level-ratio}§r§f
   tutorial-button: "Información y configuración"
   messages:
     not-enough-items: "¡No tienes suficientes artículos para vender!"
-    success: "¡Has vendido los artículos con éxito! {count}"
+    success: "¡Venta realizada! Vendiste {count} artículos y recibiste {amount} monedas. Boost: {boost}"
 
-# Formulario con configuración
+# Opciones del comprador automático.
 settings-form:
-  title: "§l§aAjustes"
+  title: "§l§aConfiguración"
   status-label: |
-    §aEl Auto-Buyer§r§f facilita la venta!§r§f
-    
-    ¡Simplemente recoge el §arecurso§r§f y se comprarán §aautomáticamente§r§f todos los objetos!
-    
-    §aNota:§r§f La función de compra automática funciona con objetos del menú principal y con recursos.
-    
-    Estado: §a{status}§r§f
-  toggle-label: "Activar/desactivar el comprador automático"
-  messages:
-    enabled: "Compra automática habilitada"
-    disabled: "Compra automática desactivada"
+    §aEl comprador automático§r§f facilita tus ventas.
 
-# Personalización del artículo
+    Recoge los recursos y los artículos compatibles se venderán automáticamente.
+
+    §aNota:§r§f La venta automática funciona con los artículos del menú principal y con los recursos configurados.
+
+    Estado: §a{status}§r§f
+  toggle-label: "Activar o desactivar el comprador automático"
+  messages:
+    enabled: "Comprador automático activado."
+    disabled: "Comprador automático desactivado."
+
+# Artículos disponibles en la tienda.
+# Formato:
+# "número":
+#   itemId: ID del artículo
+#   count: cantidad requerida
+#   price: dinero recibido por esa cantidad
+#   url: ruta o URL de la imagen
+
 "0":
   itemId: 265 # Lingote de hierro
   count: 15
@@ -94,5 +98,3 @@ settings-form:
   count: 5
   price: 500
   url: "textures/items/diamond"
-
-
