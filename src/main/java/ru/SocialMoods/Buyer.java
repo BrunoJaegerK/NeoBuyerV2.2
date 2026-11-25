@@ -14,14 +14,14 @@ import ru.SocialMoods.autobuyer.AutoBuyerAPI;
 import ru.SocialMoods.autobuyer.AutoBuyerListener;
 import ru.SocialMoods.command.BuyerCommand;
 import ru.SocialMoods.model.ShopItem;
-import ru.SocialMoods.util.TimerTask;
+import ru.SocialMoods.util.TimerTask;\nimport ru.SocialMoods.util.BoostManager;
 
 public class Buyer extends PluginBase {
 
     private final Map<Integer, ShopItem> shopItems = new HashMap<>();
     private Config config;
     private ScheduledExecutorService scheduler;
-    private AutoBuyerAPI autoBuyerAPI;
+    private AutoBuyerAPI autoBuyerAPI;\n    private BoostManager boostManager;
 
     public Buyer() {
     }
@@ -40,7 +40,7 @@ public class Buyer extends PluginBase {
             
             config = new Config(configFile, Config.YAML);
             
-            autoBuyerAPI = new AutoBuyerAPI(this);
+            boostManager = new BoostManager(this);\n            autoBuyerAPI = new AutoBuyerAPI(this);
             
             loadShopItems();
             
