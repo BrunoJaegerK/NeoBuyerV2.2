@@ -4,6 +4,6 @@ api: ["1.0.5"]
 authors:
   - Miroshka/ForgePlugins Studio
   - SocialMoods
-  - BrunoJaegerJaegerK
+  - BrunoJaegerK
 main: ru.SocialMoods.Buyer
 depend: ["FormConstructor", "EconomyAPI"]
