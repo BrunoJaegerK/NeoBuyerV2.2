@@ -75,7 +75,7 @@ public class BuyerForm {
 
         itemForm.addElement(new Label(plugin.getConfig().getString("buyer-form.item-form-content")
                 .replace("{item}", shopItem.getItemName())
-                .replace("{price}", String.valueOf(shopItem.getPrice()))
+                .replace("{price}", String.format(java.util.Locale.US, "%.2f", adjustedPrice * plugin.getBoostManager().getMultiplier(player)))
                 .replace("{available}", String.valueOf(itemCountInInventory))));
 
         itemForm.addElement("slider", new Slider("Seleccione el número de artículos:", 1f, Math.min(64, itemCountInInventory), 1, 1));
@@ -106,10 +106,15 @@ public class BuyerForm {
 
             if (totalSold > 0) {
                 pl.getInventory().sendContents(pl);
-                EconomyAPI.getInstance().addMoney(pl, adjustedPrice * totalSold);
+                double multiplier = plugin.getBoostManager().getMultiplier(pl);
+                double totalAmount = adjustedPrice * totalSold * multiplier;
+                EconomyAPI.getInstance().addMoney(pl, totalAmount);
                 Level level = player.getLocation().getLevel();
                 level.addSound(player.getLocation(), Sound.RANDOM_ORB);
-                pl.sendMessage(successMsg.replace("{count}", String.valueOf(totalSold)));
+                pl.sendMessage(successMsg
+                        .replace("{count}", String.valueOf(totalSold))
+                        .replace("{amount}", String.format(java.util.Locale.US, "%.2f", totalAmount))
+                        .replace("{boost}", String.format(java.util.Locale.US, "x%.2f", multiplier)));
                 openBuyerForm(player, plugin);
                 priceCalculator.incrementSalesCount(shopItem.getItem().getId());
             } else {
@@ -127,8 +132,8 @@ public class BuyerForm {
         String tutorialTemplate = plugin.getConfig().getString("buyer-form.tutorial-content");
         SimpleForm tutorial = new SimpleForm(plugin.getConfig().getString("buyer-form.tutorial-title"));
 
-        String formattedRatio = String.format("%.0f%%", ratio * 100);
-        String levelRatio = String.format("%.0f%%", level * 100);
+        String formattedRatio = String.format(java.util.Locale.US, "%.0f%%", ratio * 100);
+        String levelRatio = String.format(java.util.Locale.US, "%.0f%%", level * 100);
 
         String tutorialContent = tutorialTemplate
                 .replace("{ratio}", formattedRatio)
