@@ -56,7 +56,7 @@ public class Buyer extends PluginBase {
             this.getLogger().info(TextFormat.AQUA + "-----------------------------------");
             this.getLogger().info(TextFormat.YELLOW + "Síguenos en:");
             this.getLogger().info(TextFormat.BLUE + "• Telegram: " + TextFormat.WHITE + "próximamente");
-            this.getLogger().info(TextFormat.BLUE + "• VKontakte: " + TextFormat.WHITE + "proximamente");
+            this.getLogger().info(TextFormat.BLUE + "• VKontakte: " + TextFormat.WHITE + "próximamente");
             this.getLogger().info(TextFormat.BLUE + "• GitHub: " + TextFormat.WHITE + "https://github.com/BrunoJaegerK");
             this.getLogger().info(TextFormat.AQUA + "-----------------------------------");
         } catch (Exception e) {
@@ -106,6 +106,11 @@ public class Buyer extends PluginBase {
     
     public AutoBuyerAPI getAutoBuyerAPI() {
         return autoBuyerAPI;
+    }
+
+    /** Permite consultar el multiplicador económico de cada jugador. */
+    public BoostManager getBoostManager() {
+        return boostManager;
     }
 
     @Override
