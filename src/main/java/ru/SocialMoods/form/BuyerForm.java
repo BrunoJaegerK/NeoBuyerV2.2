@@ -37,10 +37,12 @@ public class BuyerForm {
             Entry<Integer, ShopItem> entry = var4.next();
             ShopItem shopItem = entry.getValue();
             int adjustedPrice = priceCalculator.getAdjustedPrice(shopItem);
+            double multiplier = plugin.getBoostManager().getMultiplier(player);
+            double boostedPrice = adjustedPrice * multiplier;
             String buttonText = buttonTemplate
                     .replace("{item_name}", shopItem.getItemName())
                     .replace("{item_count}", String.valueOf(shopItem.getCount()))
-                    .replace("{price}", String.valueOf(adjustedPrice));
+                    .replace("{price}", String.format(java.util.Locale.US, "%.2f", boostedPrice));
                     
             String imageUrl = shopItem.getImageUrl();
             if (imageUrl != null && !imageUrl.isEmpty()) {
