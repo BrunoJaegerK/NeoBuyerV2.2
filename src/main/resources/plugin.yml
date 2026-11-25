@@ -7,3 +7,12 @@ authors:
   - BrunoJaegerK
 main: ru.SocialMoods.Buyer
 depend: ["FormConstructor", "EconomyAPI"]
+permissions:
+  neobuyer.boost.vip:
+    default: false
+  neobuyer.boost.vipplus:
+    default: false
+  neobuyer.boost.mvp:
+    default: false
+  neobuyer.boost.legend:
+    default: false
