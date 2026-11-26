@@ -15,6 +15,7 @@ import ru.SocialMoods.autobuyer.AutoBuyerListener;
 import ru.SocialMoods.command.BuyerCommand;
 import ru.SocialMoods.model.ShopItem;
 import ru.SocialMoods.util.TimerTask;
+import ru.SocialMoods.util.BoostManager;
 
 public class Buyer extends PluginBase {
 
@@ -22,6 +23,7 @@ public class Buyer extends PluginBase {
     private Config config;
     private ScheduledExecutorService scheduler;
     private AutoBuyerAPI autoBuyerAPI;
+    private BoostManager boostManager;
 
     public Buyer() {
     }
@@ -39,7 +41,9 @@ public class Buyer extends PluginBase {
             }
             
             config = new Config(configFile, Config.YAML);
+            migrateLegacyMessages();
             
+            boostManager = new BoostManager(this);
             autoBuyerAPI = new AutoBuyerAPI(this);
             
             loadShopItems();
@@ -51,13 +55,22 @@ public class Buyer extends PluginBase {
             
             this.getLogger().info(TextFormat.GREEN + "NeoBuyer " + TextFormat.YELLOW + "v" + this.getDescription().getVersion() + TextFormat.GREEN + " ¡Activado correctamente!");
             this.getLogger().info(TextFormat.AQUA + "-----------------------------------");
-            this.getLogger().info(TextFormat.YELLOW + "Sigueme en:");
-            this.getLogger().info(TextFormat.BLUE + "• Telegram: " + TextFormat.WHITE + "proximamente");
-            this.getLogger().info(TextFormat.BLUE + "• VKontakte: " + TextFormat.WHITE + "proximamente");
+            this.getLogger().info(TextFormat.YELLOW + "Síguenos en:");
+            this.getLogger().info(TextFormat.BLUE + "• Telegram: " + TextFormat.WHITE + "próximamente");
+            this.getLogger().info(TextFormat.BLUE + "• VKontakte: " + TextFormat.WHITE + "próximamente");
             this.getLogger().info(TextFormat.BLUE + "• GitHub: " + TextFormat.WHITE + "https://github.com/BrunoJaegerK");
             this.getLogger().info(TextFormat.AQUA + "-----------------------------------");
         } catch (Exception e) {
             getLogger().error("Error al activar el plugin", e);
+        }
+    }
+
+    /** Actualiza únicamente el texto antiguo que todavía estaba en ruso en configuraciones existentes. */
+    private void migrateLegacyMessages() {
+        String itemFormContent = config.getString("buyer-form.item-form-content", "");
+        if (itemFormContent.contains("За ")) {
+            config.set("buyer-form.item-form-content", itemFormContent.replace("За ", "Por "));
+            config.save();
         }
     }
 
@@ -103,6 +116,11 @@ public class Buyer extends PluginBase {
     
     public AutoBuyerAPI getAutoBuyerAPI() {
         return autoBuyerAPI;
+    }
+
+    /** Permite consultar el multiplicador económico de cada jugador. */
+    public BoostManager getBoostManager() {
+        return boostManager;
     }
 
     @Override

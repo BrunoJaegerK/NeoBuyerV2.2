@@ -37,10 +37,12 @@ public class BuyerForm {
             Entry<Integer, ShopItem> entry = var4.next();
             ShopItem shopItem = entry.getValue();
             int adjustedPrice = priceCalculator.getAdjustedPrice(shopItem);
+            double multiplier = plugin.getBoostManager().getMultiplier(player);
+            double boostedPrice = adjustedPrice * multiplier;
             String buttonText = buttonTemplate
                     .replace("{item_name}", shopItem.getItemName())
                     .replace("{item_count}", String.valueOf(shopItem.getCount()))
-                    .replace("{price}", String.valueOf(adjustedPrice));
+                    .replace("{price}", String.format(java.util.Locale.US, "%.2f", boostedPrice));
                     
             String imageUrl = shopItem.getImageUrl();
             if (imageUrl != null && !imageUrl.isEmpty()) {
@@ -75,7 +77,7 @@ public class BuyerForm {
 
         itemForm.addElement(new Label(plugin.getConfig().getString("buyer-form.item-form-content")
                 .replace("{item}", shopItem.getItemName())
-                .replace("{price}", String.valueOf(shopItem.getPrice()))
+                .replace("{price}", String.format(java.util.Locale.US, "%.2f", adjustedPrice * plugin.getBoostManager().getMultiplier(player)))
                 .replace("{available}", String.valueOf(itemCountInInventory))));
 
         itemForm.addElement("slider", new Slider("Seleccione el número de artículos:", 1f, Math.min(64, itemCountInInventory), 1, 1));
@@ -106,10 +108,15 @@ public class BuyerForm {
 
             if (totalSold > 0) {
                 pl.getInventory().sendContents(pl);
-                EconomyAPI.getInstance().addMoney(pl, adjustedPrice * totalSold);
+                double multiplier = plugin.getBoostManager().getMultiplier(pl);
+                double totalAmount = adjustedPrice * totalSold * multiplier;
+                EconomyAPI.getInstance().addMoney(pl, totalAmount);
                 Level level = player.getLocation().getLevel();
                 level.addSound(player.getLocation(), Sound.RANDOM_ORB);
-                pl.sendMessage(successMsg.replace("{count}", String.valueOf(totalSold)));
+                pl.sendMessage(successMsg
+                        .replace("{count}", String.valueOf(totalSold))
+                        .replace("{amount}", String.format(java.util.Locale.US, "%.2f", totalAmount))
+                        .replace("{boost}", String.format(java.util.Locale.US, "x%.2f", multiplier)));
                 openBuyerForm(player, plugin);
                 priceCalculator.incrementSalesCount(shopItem.getItem().getId());
             } else {
@@ -122,13 +129,13 @@ public class BuyerForm {
 
     public static void ShowTutorialForm(Player player, Buyer plugin) {
         double ratio = plugin.getConfig().getDouble("price-ratio");
-        double level = plugin.getConfig().getInt("level-ratio");
+        double level = plugin.getConfig().getDouble("level-ratio");
 
         String tutorialTemplate = plugin.getConfig().getString("buyer-form.tutorial-content");
         SimpleForm tutorial = new SimpleForm(plugin.getConfig().getString("buyer-form.tutorial-title"));
 
-        String formattedRatio = String.format("%.0f%%", ratio * 100);
-        String levelRatio = String.format("%.0f%%", level * 100);
+        String formattedRatio = String.format(java.util.Locale.US, "%.0f%%", ratio * 100);
+        String levelRatio = String.format(java.util.Locale.US, "%.0f%%", level * 100);
 
         String tutorialContent = tutorialTemplate
                 .replace("{ratio}", formattedRatio)
@@ -136,10 +143,10 @@ public class BuyerForm {
 
         tutorial.addContent(tutorialContent);
         
-        tutorial.addButton("Настройки", (pl, button) -> 
+        tutorial.addButton("Configuración", (pl, button) -> 
             openSettingsForm(pl, plugin));
             
-        tutorial.addButton("Назад", (pl, button) -> 
+        tutorial.addButton("Volver", (pl, button) -> 
             openBuyerForm(pl, plugin));
             
         tutorial.send(player);
@@ -152,7 +159,7 @@ public class BuyerForm {
 
         boolean isAutoBuyerEnabled = plugin.getAutoBuyerAPI().isPlayerConnected(player);
 
-        String status = isAutoBuyerEnabled ? "Подключен" : "Отключен";
+        String status = isAutoBuyerEnabled ? "Activado" : "Desactivado";
         form.addElement(new Label(plugin.getConfig().getString("settings-form.status-label").replace("{status}", status)));
 
         form.addElement("toggle", new Toggle(plugin.getConfig().getString("settings-form.toggle-label"), isAutoBuyerEnabled));

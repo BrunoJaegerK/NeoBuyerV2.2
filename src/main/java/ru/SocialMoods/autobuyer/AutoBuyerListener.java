@@ -64,7 +64,8 @@ public class AutoBuyerListener implements Listener {
 
             if (totalQuantity >= buyerData.quantity()) {
                 int numberOfSales = totalQuantity / buyerData.quantity();
-                double totalPrice = numberOfSales * buyerData.pricePerItem();
+                double multiplier = plugin.getBoostManager().getMultiplier(player);
+                double totalPrice = numberOfSales * buyerData.pricePerItem() * multiplier;
                 EconomyAPI.getInstance().addMoney(player, totalPrice);
 
                 int quantityToRemove = numberOfSales * buyerData.quantity();
@@ -93,7 +94,8 @@ public class AutoBuyerListener implements Listener {
                 String itemName = isResourceMatch ? productItem.getName() : pickedItem.getName();
                 String popupMessage = salePopupMessage
                         .replace("{item_name}", itemName)
-                        .replace("{amount}", String.format("%.2f", totalPrice));
+                        .replace("{amount}", String.format(java.util.Locale.US, "%.2f", totalPrice))
+                        .replace("{boost}", String.format(java.util.Locale.US, "x%.2f", multiplier));
 
                 player.sendPopup(popupMessage);
             }

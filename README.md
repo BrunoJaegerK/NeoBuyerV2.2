@@ -1,105 +1,139 @@
- # NeoBuyer V2
+# NeoBuyer V2
 
 <p align="center">
   <img src="https://img.shields.io/badge/Minecraft-Nukkit-brightgreen.svg" alt="Minecraft Nukkit">
-  <img src="https://img.shields.io/badge/Versión-2.1.0-blue.svg" alt="Versión">
+  <img src="https://img.shields.io/badge/Versión-2.2.0-blue.svg" alt="Versión">
   <img src="https://img.shields.io/badge/Java-17-orange.svg" alt="Java 17">
 </p>
 
-## 📋 Descripción
+## Descripción
 
-**NeoBuyer V2** - Este es un práctico plugin para Nukkit que permite a los jugadores vender sus objetos al servidor a precios fijos o dinámicos. El plugin ofrece una interfaz sencilla para vender objetos y la opción de activar la venta automática.
+**NeoBuyer V2** es un plugin para servidores Nukkit que permite a los jugadores vender artículos al servidor mediante una interfaz sencilla o utilizar la venta automática al recoger objetos compatibles.
 
-> [!NOTE]
-> Este plugin es un fork de NeoBuyer con algunas funciones añadidas y traducido al español
+Incluye precios ajustables, soporte para recursos sin procesar, avisos de venta y multiplicadores de dinero configurables por rango.
 
-## ✨ Particularidades
+## Características
 
-- **💰 Ventas de artículos simples** - Vende objetos al servidor a través de una interfaz cómoda.
-- **🔄 Precios dinámicos** – los precios de los artículos pueden variar según la cantidad de artículos vendidos.
-- **⚙️ Venta automática** – activa la venta automática de objetos a medida que aparecen en tu inventario.
-- **🔹 Soporte de recursos** – venta automática de minerales en bruto (hierro, oro, diamantes, etc.)
-- **📊 Estadísticas de ventas**: seguimiento de los artículos vendidos y los ingresos obtenidos.
-- **🌐 Formularios fáciles de usar** – una interfaz intuitiva para vender artículos
+- Venta manual de artículos mediante formularios.
+- Venta automática al recoger artículos configurados.
+- Compatibilidad con minerales y recursos sin procesar.
+- Precios ajustables según la actividad de ventas.
+- Boost de dinero por rango, con multiplicadores decimales desde x1.0 hasta x5.0.
+- Compatibilidad con cualquier sistema de permisos que permita asignar permisos a rangos.
+- Mensajes y avisos configurables en español.
 
-## 🛠️ Instalación
+## Instalación
 
-1. Descarga la última versión del plugin desde la página de [releases]
-2. Coloca el archivo JAR en el directorio `plugins` de tu servidor
-3. Asegúrate de que las dependencias —FormConstructor y EconomyAPI— estén instaladas
-4. Reinicia el servidor
-5. Configura los ajustes en `plugins/NeoBuyer/config.yml`
-6. ¡Listo!
+1. Descarga el archivo JAR desde la sección de [Releases](https://github.com/BrunoJaegerK/NeoBuyerV2.2/releases).
+2. Coloca el JAR en la carpeta `plugins` de tu servidor.
+3. Instala las dependencias **FormConstructor** y **EconomyAPI**.
+4. Inicia el servidor para que se generen los archivos de configuración.
+5. Configura los artículos en `plugins/NeoBuyer/config.yml` y los multiplicadores en `plugins/NeoBuyer/boost.yml`.
+6. Reinicia el servidor.
 
-## ⚙️ Ajustes
+## Boost de dinero por rango
 
-### Parámetros clave
+El archivo `boost.yml` permite definir cuánto dinero adicional recibe cada rango por las ventas realizadas con NeoBuyer.
 
-Puede configurar los siguientes parámetros en el archivo `config.yml`:
-
-- **buyer-form** - ajustes de apariencia para los formularios de venta de objetos
-- **price-ratio** - factor de ajuste de precio para ventas al por mayor
-- **level-ratio** - factor que determina el impacto del nivel del jugador en el precio
-- **auto-buyer.resources-enabled** - activar/desactivar la compatibilidad con recursos en el comprador automático
-
-### Personalización del artículo
-
-Ejemplo de configuración de artículos a la venta:
+Ejemplo:
 
 ```yaml
-items:
-  1:
-    id: 1
-    meta: 0
-    count: 64
-    name: "Piedra"
-    price: 5
-    image: "https://example.com/stone.png"
-  2:
-    id: 17
-    meta: 0
-    count: 32
-    name: "Madera"
-    price: 10
-    image: "https://example.com/wood.png"
+boosts:
+  vip:
+    permission: "neobuyer.boost.vip"
+    multiplier: 1.2
+
+  vip_plus:
+    permission: "neobuyer.boost.vipplus"
+    multiplier: 1.5
+
+  mvp:
+    permission: "neobuyer.boost.mvp"
+    multiplier: 2.0
+
+  legend:
+    permission: "neobuyer.boost.legend"
+    multiplier: 3.0
 ```
 
-## 📌 Equipos
+### Configuración
+
+- `permission`: permiso que debe tener el jugador para recibir el boost.
+- `multiplier`: multiplicador aplicado al dinero recibido. Acepta decimales y tiene un máximo de x5.0.
+
+Asigna el permiso correspondiente a cada rango desde tu plugin de permisos. Por ejemplo, para el rango VIP:
+
+```text
+neobuyer.boost.vip
+```
+
+Puedes utilizar cualquier nombre de rango y cualquier multiplicador entre x1.0 y x5.0, por ejemplo `1.25`, `1.75` o `4.5`.
+
+**Importante:** los multiplicadores no se acumulan. Si un jugador tiene varios permisos de boost, se aplica únicamente el multiplicador más alto. Si no tiene ninguno, recibe el pago normal (x1.0).
+
+El boost se aplica tanto a las ventas manuales como a las ventas automáticas. Los precios base de los artículos no se modifican.
+
+## Configuración de artículos
+
+Los artículos se configuran en `config.yml`. Ejemplo:
+
+```yaml
+"0":
+  itemId: 265
+  count: 15
+  price: 100
+  url: "textures/items/iron_ingot"
+
+"1":
+  itemId: 266
+  count: 10
+  price: 200
+  url: "textures/items/gold_ingot"
+```
+
+- `itemId`: ID del artículo.
+- `count`: cantidad necesaria para completar una venta.
+- `price`: dinero base recibido por esa cantidad.
+- `url`: ruta o URL de la imagen del botón.
+
+## Venta automática de recursos
+
+En `config.yml`, la sección `auto-buyer` permite habilitar la conversión de recursos sin procesar a sus productos finales:
+
+```yaml
+auto-buyer:
+  resources-enabled: true
+  resources:
+    "15": 265
+    "14": 266
+    "56": 264
+    "129": 388
+    "153": 406
+```
+
+La clave representa el ID del recurso recogido y el valor el ID del producto que se vende.
+
+## Comandos
 
 | Comando | Descripción |
-|---------|----------|
-| `/buyer` | Abra el formulario de venta de artículos. |
-| `/buyer reload` | Recargar la configuración del plugin (se requieren privilegios de administrador) |
+|---|---|
+| `/buyer` | Abre el menú de venta. |
 
-## 📝 Permisos
+## Dependencias
 
-- `neobuyer.use` - Acceso a las funciones principales del plugin
-- `neobuyer.admin` - Acceso a las funciones administrativas del plugin (recargar la configuración)
+- [FormConstructor](https://github.com/MEFRREEX/FormConstructor)
+- [EconomyAPI](https://github.com/Muqsit/EconomyAPI)
 
-## ❓ Preguntas frecuentes
+## Compilación
 
-<details>
-<summary><b>¿Cómo funciona la venta automática?</b></summary>
-<p>
-La venta automática te permite vender artículos específicos de forma automática tan pronto como aparecen en tu inventario. Para activar esta función, abre la interfaz de compra mediante el comando <code>/buyer</code>, ve a «Configuración» y activa la opción de venta automática.
-</p>
-</details>
+El proyecto utiliza Gradle. Para compilarlo localmente, ejecuta:
 
-<details>
-<summary><b>¿Por qué cambian los precios de los artículos?</b></summary>
-<p>
-El plugin utiliza un sistema de precios dinámicos en el que los precios de los objetos pueden variar según la cantidad vendida de un tipo específico. Cuantos más objetos de un tipo determinado se vendan en el servidor, menor puede llegar a ser su precio.
-</p>
-</details>
+```bash
+gradle build
+```
 
-<details>
-<summary><b>¿Cómo configuro la venta automática de minerales?</b></summary>
-<p>
-En el archivo `config.yml`, dentro de la sección `auto-buyer`, habilita el parámetro `resources-enabled` estableciendo su valor en `true`. A continuación, en la sección `resources`, puedes configurar la correspondencia entre los ID de mineral y los ID de producto terminado.
-</p>
-</details>
+El archivo JAR se genera en `build/libs/`.
 
----
+## Autoría
 
-<p align="center">
-Mejorado con ❤️ <a href="(https://github.com/BrunoJaegerK)">BrunoJaegerK</a>
+Desarrollado a partir del proyecto NeoBuyer, con modificaciones y mantenimiento de **BrunoJaegerK**.

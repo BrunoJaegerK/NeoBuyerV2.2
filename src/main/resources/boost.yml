@@ -1,0 +1,29 @@
+# Multiplicadores de dinero por rango.
+# Cada rango se identifica mediante un permiso. Asigna ese permiso al grupo/rango
+# correspondiente en tu plugin de permisos.
+#
+# El jugador recibe el multiplicador más alto entre los permisos que tenga.
+# Los boosts no se suman entre sí. El valor permitido está entre x1.0 y x5.0.
+#
+# Ejemplo: si un jugador tiene neobuyer.boost.vip, recibirá x1.2 por sus ventas.
+boosts:
+  vip:
+    permission: "neobuyer.boost.vip"
+    multiplier: 1.2
+
+  vip_plus:
+    permission: "neobuyer.boost.vipplus"
+    multiplier: 1.5
+
+  mvp:
+    permission: "neobuyer.boost.mvp"
+    multiplier: 2.0
+
+  legend:
+    permission: "neobuyer.boost.legend"
+    multiplier: 3.0
+
+  # Puedes crear tus propios rangos y usar decimales.
+  # elite:
+  #   permission: "neobuyer.boost.elite"
+  #   multiplier: 4.75
